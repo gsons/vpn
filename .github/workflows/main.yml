@@ -5,7 +5,7 @@ name: 定时任务生成订阅链接
 # Controls when the workflow will run
 on:
   schedule:
-    - cron: '0 */4 * * *'  # 定时任务，每隔4h执行一次
+    - cron: '*/30 * * * *'  # 定时任务，每隔4h执行一次
 
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
