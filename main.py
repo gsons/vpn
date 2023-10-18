@@ -41,7 +41,7 @@ def main():
             # 如果类型是wireguard
             if proxy['type'] == 'wireguard' :
                 index+=1
-                vstr=f"wg://{proxy['server']}:{proxy['port']}?publicKey={proxy['public-key']}&privateKey={proxy['private-key']}&ip={proxy['ip']}&udp=1#白菜云 wireguard 中速节点{index}"
+                vstr=f"wg://{proxy['server']}:{proxy['port']}?publicKey={proxy['public-key']}&privateKey={proxy['private-key']}&ip={proxy['ip']}&udp=1#白菜云wireguard中速节点{index}"
                 result += vstr + '\n'
 
     host_arr = [
@@ -64,7 +64,7 @@ def main():
             if line_num > 1:
                 continue
             
-            name = f"白菜云 VLESS 高速节点{host_key} {line_name}专线{line_num}"
+            name = f"白菜云高速节点{host_key} {line_name}专线{line_num}"
             vlessMain = f"vless://{host_obj['user_id']}@{ip_obj['ip']}:80?encryption=none&sni={host_obj['host']}&fp=randomized&type=ws&host={host_obj['host']}&path=%2F%3Fed%3D2048#{name}"
             result += vlessMain + '\n'
 
@@ -78,7 +78,7 @@ def main():
     
     sstr = base64.b64decode(response.text).decode("utf-8")
 
-    sstr = sstr.replace('#','#白菜云 慢速节点 ')   
+    sstr = sstr.replace('#','#白菜云慢速节点')   
 
     #result += sstr     
 
