@@ -80,7 +80,7 @@ def main():
 
     sstr = sstr.replace('#','#白菜云 慢速节点 ')   
 
-    result += sstr     
+    #result += sstr     
 
     encoded_data = base64.b64encode(result.encode()).decode()
 
