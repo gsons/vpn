@@ -5,7 +5,7 @@ name: 定时任务生成订阅链接
 # Controls when the workflow will run
 on:
   schedule:
-    - cron: '*/30 * * * *'  # 定时任务，每隔 30 分钟执行一次
+    - cron: '0 */4 * * *'  # 定时任务，每隔4h执行一次
 
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -47,5 +47,6 @@ jobs:
           git config --global user.email "976955017@qq.com"
           git config --global user.name "gsons"
           git add shadowrocket_base64.txt
+          git add shadowrocket_min_base64.txt
           git commit -m "update shadowrocket_base64.txt"
           git push

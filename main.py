@@ -78,9 +78,14 @@ def main():
     
     sstr = base64.b64decode(response.text).decode("utf-8")
 
-    sstr = sstr.replace('#','#白菜云慢速节点')   
+    sstr = sstr.replace('#','#白菜云慢速节点')
 
-    #result += sstr     
+    encoded_data = base64.b64encode(result.encode()).decode()
+
+    with open('shadowrocket_min_base64.txt', 'w',encoding="utf-8") as f:
+        f.write(encoded_data)   
+
+    result += sstr     
 
     encoded_data = base64.b64encode(result.encode()).decode()
 
