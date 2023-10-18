@@ -1,11 +1,11 @@
 # This is a basic workflow to help you get started with Actions
 
-name: 定时任务
+name: 定时任务生成订阅链接
 
 # Controls when the workflow will run
 on:
   schedule:
-    - cron: '*/30 * * * *'  # 定时任务，每隔 5 分钟执行一次
+    - cron: '*/30 * * * *'  # 定时任务，每隔 30 分钟执行一次
 
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -28,11 +28,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run main.php
-        run: php main.php
+      # 安装依赖
+      - name: Install dependencies
+         run: pip install -r requirements.txt
 
-      # Runs a set of commands using the runners shell
+      # 运行python
+      - name: Run main.py
+        run: python main.py
+
+      # 提交运行时文件
       - name: Commit and Push Changes
         run: |
           git config --global user.email "976955017@qq.com"
