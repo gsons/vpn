@@ -44,9 +44,9 @@ jobs:
       # 提交运行时文件
       - name: Commit and Push Changes
         run: |
-          git config --global user.email "qq976955017@github.com"
-          git config --global user.name "GitHub@bot"
-          git add shadowrocket_base64.txt
-          git add shadowrocket_min_base64.txt
-          git commit -m "update shadowrocket_base64.txt"
+          git config --local user.email "qq976955017@gmail.com"
+          git config --local user.name "gsonhub"
+          git add .
+          git commit -m "Updated at $(date '+%Y-%m-%d %H:%M:%S')"
           git push
+
