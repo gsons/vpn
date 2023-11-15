@@ -45,7 +45,7 @@ def main():
                 result += vstr + '\n'
 
     host_arr = [
-        {'user_id': 'a51e73de-c17d-43be-9f51-3acbdf59d35f', 'host': 'worker-snowy-flower-75f0.qq976955017.workers.dev'},
+        {'user_id': 'c5d1e036-69f0-4d50-b4d0-bd9c9c73928d', 'host': 'worker-snowy-flower-75f0.qq976955017.workers.dev'},
         {'user_id': '3c46a4d8-1bd8-4b8c-a79a-eedfb9d0a184', 'host': 'worker-wild-salad-5553.976955017.workers.dev'}
     ]
     
