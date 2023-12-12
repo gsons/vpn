@@ -2,6 +2,7 @@ import requests
 import json
 import yaml
 import base64
+import re
 
 def get_ip_arr():
     url = 'https://api.hostmonit.com/get_optimization_ip'
@@ -15,6 +16,30 @@ def get_ip_arr():
         return data.get("info", [])
     else:
         return []
+
+def fetch_freecn_node():
+    url = "http://dns88.v6.army:5000"
+    payload={}
+    headers = {'User-Agent': 'shadowrocket'}
+    response = requests.request("GET", url, headers=headers, data=payload)
+    sstr = base64.b64decode(response.text).decode("utf-8")
+    arr = sstr.split('vmess://')
+
+    encoded_data = ''
+    for proxy in arr:
+        if proxy==''  :continue
+        str = base64.b64decode(proxy).decode("utf-8")
+        pattern = re.compile(r'"host":\s*("[^"]*"|\s*)')
+        mstr = pattern.sub(r'"host": "cloud189-anhui-home.oos-ahwh.ctyunapi.cn"', str)
+        match = re.search(r'"port":\s*([^,]*)', mstr)
+        port_value = match.group(1) if match else ""
+        pattern = re.compile(r'"ps":\s*("[^"]*"|\s*)')
+        _mstr = pattern.sub(r'"ps": "电信云盘'+port_value+'"', mstr)
+        encoded_data += ('vmess://'+base64.b64encode(_mstr.encode()).decode()+'\n')
+        #print(encoded_data)
+    encoded_data=base64.b64encode(encoded_data.encode()).decode()
+    with open('shadowrocket_cn_base64.txt', 'w',encoding="utf-8") as f:
+        f.write(encoded_data)
 
 def main():
 
@@ -94,3 +119,4 @@ def main():
         
 if __name__ == "__main__":
     main()
+    fetch_freecn_node()
