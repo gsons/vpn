@@ -103,7 +103,7 @@ def main():
     
     sstr = base64.b64decode(response.text).decode("utf-8")
 
-    sstr = sstr.replace('#','#白菜云慢速节点-')
+    sstr = sstr.replace('#','#白菜云-')
 
     print(sstr)
 
