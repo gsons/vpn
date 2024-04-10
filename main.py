@@ -121,4 +121,4 @@ def main():
         
 if __name__ == "__main__":
     main()
-    fetch_freecn_node()
+    #fetch_freecn_node()
