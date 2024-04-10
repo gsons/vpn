@@ -94,7 +94,7 @@ def main():
             result += vlessMain + '\n'
 
     
-    url = "https://mareep.netlify.app/sub/shadowrocket_base64.txt"
+    url = "https://raw.githubusercontent.com/lgf4591/cloudflare-pages-vpn/40524140a19a420159d941b8da1a8771151ea2c4/ChromeGo_Merge/sub/shadowrocket_base64.txt"
     payload={}
     headers = {
     'User-Agent': 'shadowrocket'
@@ -121,4 +121,4 @@ def main():
         
 if __name__ == "__main__":
     main()
-    #fetch_freecn_node()
+    fetch_freecn_node()
