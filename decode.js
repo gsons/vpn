@@ -4,13 +4,13 @@ var $url="https://iptv345.com/";
 
 var $code_arr= []
 
-async function initPage(url) {
+async function initPage(uri) {
     var headers = {
       Referer: $url,
       "User-Agent":
         "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1 Edg/124.0.0.0",
     };
-    const response = await axios.get(url, { headers: headers });
+    const response = await axios.get($url+uri, { headers: headers });
     var [, jsstr] = /<script>(var[^<]+)<\/script>/.exec(response.data);
 
     // var [,code]=/<option value="([^"]+)">/.exec(response.data)
@@ -819,10 +819,19 @@ function execVm(jsstr) {
 
 async function main()
 {
-    var js=await initPage($url+"?act=play&tid=itv&id=11");
+    var js=await initPage("?act=play&tid=ws&id=37");
     //console.log(js)
+    var tt=+new Date()
     var urls=execVm(js);
+    console.log(+new Date()-tt);
     console.log(urls)
+    var headers = {
+      Referer: $url,
+      "User-Agent":
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1 Edg/124.0.0.0",
+    };
+    var res=await axios({url: urls[0],headers,followRedirect: true,maxRedirects: 0, validateStatus: function () { return true}})
+    console.log(res.headers.location)
     process.exit();
 }
 
