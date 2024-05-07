@@ -2,7 +2,7 @@ const axios = require("axios");
 
 var $url="https://iptv345.com/";
 
-var $code= ''
+var $code_arr= []
 
 async function initPage(url) {
     var headers = {
@@ -12,14 +12,26 @@ async function initPage(url) {
     };
     const response = await axios.get(url, { headers: headers });
     var [, jsstr] = /<script>(var[^<]+)<\/script>/.exec(response.data);
-    var [,code]=/<option value="([^"]+)">/.exec(response.data)
-    $code = code
+
+    // var [,code]=/<option value="([^"]+)">/.exec(response.data)
+    // $code = code
+
+    const regex = /<option\s+value="([^"]+)"[^>]*>(.*?)<\/option>/g;  
+    let match;  
+    const values = [];  
+    while ((match = regex.exec(response.data)) !== null) {  
+        values.push(match[1]); 
+    }
+    $code_arr = values
     return jsstr
 }
 
 
 function execVm(jsstr) {
+    //console.log(jsstr)
   eval(jsstr)
+ // console.log(string)
+
   var document = {};
   document.write = (str) => {
     document.JS_STR = str;
@@ -797,18 +809,20 @@ function execVm(jsstr) {
     uri = uri.replace(hken, "");
     return uri;
   }
-
-  var url = fetchLiveUrl($code);
-  console.log($code)
-  return url;
+//   console.log(token)
+//   console.log(hken)
+//   console.log(hkens)
+//   console.log(string)
+  console.log($code_arr);
+  return $code_arr.map((v)=>{return fetchLiveUrl(v)});
 }
 
 async function main()
 {
-    var js=await initPage($url+"?act=play&tid=itv&id=17");
+    var js=await initPage($url+"?act=play&tid=itv&id=11");
     //console.log(js)
-    var url=execVm(js);
-    console.log(url)
+    var urls=execVm(js);
+    console.log(urls)
     process.exit();
 }
 
