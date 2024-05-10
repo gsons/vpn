@@ -809,29 +809,34 @@ function execVm(jsstr) {
     uri = uri.replace(hken, "");
     return uri;
   }
-//   console.log(token)
-//   console.log(hken)
-//   console.log(hkens)
-//   console.log(string)
   console.log($code_arr);
   return $code_arr.map((v)=>{return fetchLiveUrl(v)});
 }
 
 async function main()
 {
-    var js=await initPage("?act=play&tid=ws&id=37");
+   var  tt=+new Date()
+    var js=await initPage("?act=play&tid=gt&id=44");
     //console.log(js)
-    var tt=+new Date()
+    console.log(+new Date()-tt);
+    tt=+new Date()
     var urls=execVm(js);
     console.log(+new Date()-tt);
+    tt=+new Date()
     console.log(urls)
     var headers = {
       Referer: $url,
       "User-Agent":
         "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1 Edg/124.0.0.0",
     };
-    var res=await axios({url: urls[0],headers,followRedirect: true,maxRedirects: 0, validateStatus: function () { return true}})
-    console.log(res.headers.location)
+    url=urls[0]
+    let res=await axios({url,headers});
+    console.log(+new Date()-tt);
+    let live_url=res.request.res.responseUrl
+    console.log(live_url)
+    let cmd = `ffplay -headers "Referer: https://iptv345.com/"   -i "${live_url}"`
+    console.log(cmd)
+
     process.exit();
 }
 
